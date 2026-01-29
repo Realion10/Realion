@@ -39,8 +39,8 @@
     <main class="max-w-7xl mx-auto py-12 px-6">
         
         <header class="text-center mb-16 animate-fade-in">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">Pakistan's Global <br><span class="text-blue-600">Rice Command Center.</span></h1>
-            <p class="text-xl text-slate-500 max-w-2xl mx-auto">Digitizing the 27-mill Bucheki cluster for direct G2G and premium B2B export. Verified quality, automated compliance, and secure logistics.</p>
+            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-slate-900">Pakistan's Global <br><span class="text-blue-600">Rice Command Center.</span></h1>
+            <p class="text-xl text-slate-500 max-w-2xl mx-auto">Digitizing the 27-mill Bucheki cluster for direct G2G and premium B2B export. Verified quality and secure trade.</p>
         </header>
 
         <section id="loggedOutView" class="bg-white border-2 border-dashed border-slate-200 rounded-[3rem] p-20 text-center animate-fade-in">
@@ -48,156 +48,15 @@
                 <i class="fas fa-shield-alt text-3xl text-slate-400"></i>
             </div>
             <h2 class="text-3xl font-bold mb-4">Sovereign Exchange Locked</h2>
-            <p class="text-slate-500 mb-8 max-w-md mx-auto text-lg">Detailed G2G quota tracking, private mill inventories, and lab reports are restricted to verified trade partners.</p>
+            <p class="text-slate-500 mb-8 max-w-md mx-auto text-lg">Detailed G2G tracking and mill inventories are restricted to verified trade partners.</p>
             <button onclick="toggleAuthModal()" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black hover:bg-blue-600 transition shadow-xl">Authenticate to Enter</button>
         </section>
 
         <section id="loggedInView" class="hidden space-y-12 animate-fade-in">
-            
-            <div class="gradient-bg text-white rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden border border-white/10">
+            <div class="gradient-bg text-white rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <span class="w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
-                        <h3 class="text-blue-300 font-bold uppercase tracking-widest text-xs">G2G Priority Channel: Türkiye Strategic Quota</h3>
-                    </div>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <h3 class="text-blue-300 font-bold uppercase tracking-widest text-xs mb-6">G2G Strategic Channel: Türkiye Quota</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
                         <div class="lg:col-span-2">
-                            <h2 class="text-5xl font-black mb-4 tracking-tighter">15,480 MT <span class="text-lg font-normal opacity-50 tracking-normal text-white">Remaining</span></h2>
-                            <div class="w-full bg-white/10 h-3 rounded-full overflow-hidden mb-4 border border-white/5">
-                                <div class="bg-blue-400 h-full" style="width: 14%"></div>
-                            </div>
-                            <p class="text-blue-100/60 text-sm font-medium italic">Current utilization of the 18,000 MT tariff-rate quota.</p>
-                        </div>
-                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col justify-center">
-                            <span class="text-[10px] opacity-60 font-black uppercase mb-1">Cluster Capacity</span>
-                            <div class="text-3xl font-black">4,500 <span class="text-xs font-normal">MT/Mo</span></div>
-                        </div>
-                        <div class="bg-blue-600 p-6 rounded-2xl flex items-center justify-center text-center cursor-pointer hover:bg-blue-500 transition shadow-lg">
-                            <span class="font-black text-xs tracking-widest uppercase">Export Documentation <br>Portal</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <div class="flex justify-between items-center mb-8 px-2">
-                    <h3 class="text-3xl font-black tracking-tight">Verified Inventory</h3>
-                    <div class="flex space-x-2">
-                        <button class="bg-white border text-slate-700 px-4 py-2 rounded-xl text-xs font-black shadow-sm">All Varieties</button>
-                        <button onclick="alert('Mill Authorization Required')" class="bg-green-600 text-white px-5 py-2 rounded-xl text-xs font-black shadow-lg shadow-green-200">+ ADD STOCK</button>
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white p-8 rounded-[2rem] border shadow-sm hover:border-blue-500 transition-all cursor-pointer group">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h4 class="text-2xl font-bold group-hover:text-blue-600 transition">1121 Kainat (Sella)</h4>
-                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Bismillah Rice Mills, Bucheki</p>
-                            </div>
-                            <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-[10px] font-black border border-green-100">IN STOCK</span>
-                        </div>
-                        <div class="flex justify-between items-end border-t pt-6">
-                            <div class="text-4xl font-black">$1,150 <span class="text-xs font-normal text-slate-400 tracking-normal">/MT FOB</span></div>
-                            <button class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg group-hover:bg-blue-600 transition">Request Proforma</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="authModal" class="hidden fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-        <div class="bg-white rounded-[2.5rem] p-12 max-w-md w-full shadow-2xl animate-fade-in">
-            <h3 class="text-4xl font-black mb-3 tracking-tight">Portal Access</h3>
-            <p class="text-slate-500 mb-8 text-sm leading-relaxed">Login for Bucheki Export Cluster partners, government attachés, and verified buyers.</p>
-            
-            <div class="space-y-4">
-                <div class="relative">
-                    <i class="fas fa-envelope absolute left-4 top-4.5 text-slate-300"></i>
-                    <input type="email" id="email" placeholder="Business Email" class="w-full p-4 pl-12 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 font-medium transition">
-                </div>
-                <div class="relative">
-                    <i class="fas fa-lock absolute left-4 top-4.5 text-slate-300"></i>
-                    <input type="password" id="password" placeholder="Access Password" class="w-full p-4 pl-12 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 font-medium transition">
-                </div>
-                <button onclick="handleLogin()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black shadow-xl hover:bg-blue-700 transition active:scale-[0.98]">Sign In</button>
-                <div class="text-center py-2">
-                    <span class="text-slate-300 text-xs font-bold uppercase tracking-widest">or</span>
-                </div>
-                <button onclick="handleSignup()" class="w-full border-2 border-slate-100 text-slate-600 py-4 rounded-2xl font-bold hover:bg-slate-50 transition">Register for Cluster Access</button>
-            </div>
-            
-            <button onclick="toggleAuthModal()" class="w-full text-slate-400 mt-8 text-[10px] font-black uppercase tracking-widest hover:text-slate-600 transition">Return to Landing Page</button>
-        </div>
-    </div>
-
-    <script>
-        // SUPABASE CONFIGURATION (HARD-CODED AS REQUESTED)
-        const SUPABASE_URL = 'https://ihpjixhzfodnipmhsqvu.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_J4B-Z7yfRWio6HhezHGDKA_jgsAsvKu';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        function toggleAuthModal() {
-            document.getElementById('authModal').classList.toggle('hidden');
-        }
-
-        async function handleLogin() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if(!email || !password) return alert("Please fill in all fields.");
-
-            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-            
-            if (error) {
-                alert("Auth Failed: " + error.message);
-            } else {
-                toggleAuthModal();
-                checkUser();
-            }
-        }
-
-        async function handleSignup() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if(!email || !password) return alert("Please enter email and password to register.");
-
-            const { data, error } = await supabaseClient.auth.signUp({ email, password });
-            
-            if (error) {
-                alert("Registration Error: " + error.message);
-            } else {
-                alert("Account verification link sent to your email! Please confirm to activate your portal access.");
-            }
-        }
-
-        async function handleLogout() {
-            const { error } = await supabaseClient.auth.signOut();
-            location.reload();
-        }
-
-        async function checkUser() {
-            const { data: { user } } = await supabaseClient.auth.getUser();
-            if (user) {
-                // UI Toggle for Logged In State
-                document.getElementById('loggedOutView').classList.add('hidden');
-                document.getElementById('loggedInView').classList.remove('hidden');
-                document.getElementById('userBadge').classList.remove('hidden');
-                document.getElementById('loginBtn').classList.add('hidden');
-                document.getElementById('userEmail').innerText = user.email;
-            } else {
-                // UI Toggle for Logged Out State
-                document.getElementById('loggedOutView').classList.remove('hidden');
-                document.getElementById('loggedInView').classList.add('hidden');
-                document.getElementById('userBadge').classList.add('hidden');
-                document.getElementById('loginBtn').classList.remove('hidden');
-            }
-        }
-
-        // Initialize state check on load
-        window.onload = checkUser;
-    </script>
-</body>
-</html>
+                            <h2 class="text-5xl font-black mb-4">15,480 MT <span class="text-lg font-normal opacity-50">Left</span></h2>
+                            <div class="w-full bg-white/10 h-3
