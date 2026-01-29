@@ -3,110 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealionX | G2G Strategic Command</title>
+    <title>RealionX | Global Rice Exchange & G2G Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .g2g-border { border-left: 4px solid #2563eb; }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans">
+<body class="bg-slate-50 font-sans text-slate-900">
 
-    <div class="bg-blue-600 px-6 py-2 flex justify-between text-[10px] font-bold uppercase tracking-widest">
-        <span>G2G Facilitation Active</span>
-        <span>TR-PK Quota Utilization: 14%</span>
-        <span>USD/PKR: 280.45</span>
+    <div class="bg-slate-900 text-white py-2 overflow-hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-widest border-b border-slate-700">
+        <div class="inline-block animate-pulse px-4">● TÜRKIYE G2G QUOTA: 18,000 MT AVAILABLE</div>
+        <div class="inline-block px-4 opacity-50">● 1121 SELLA: $1,155/MT</div>
+        <div class="inline-block px-4 opacity-50">● IRRI-6: $610/MT</div>
+        <div class="inline-block px-4 opacity-50">● BUCHEKI CLUSTER STATUS: READY FOR INSPECTION</div>
     </div>
 
-    <nav class="border-b border-slate-800 px-8 py-5 flex justify-between items-center bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
-        <div class="text-2xl font-black tracking-tighter">REALION<span class="text-blue-500">X</span> <span class="text-xs text-slate-500 font-normal ml-2">G2G AGGREGATOR</span></div>
-        <div class="flex space-x-8 text-sm font-bold">
-            <button onclick="showPanel('ops')" class="hover:text-blue-400">Operations</button>
-            <button onclick="showPanel('cluster')" class="hover:text-blue-400">Cluster Map</button>
-            <button class="bg-blue-600 px-5 py-2 rounded-lg text-white">Contact Trade Attaché</button>
+    <nav class="glass sticky top-0 z-50 px-8 py-5 border-b flex justify-between items-center">
+        <div class="flex items-center space-x-6">
+            <div class="text-3xl font-black text-slate-900 tracking-tighter">REALION<span class="text-blue-600 font-extrabold">X</span></div>
+            <div class="hidden lg:flex space-x-6 text-sm font-bold text-slate-500">
+                <button onclick="showSection('market')" class="hover:text-blue-600 transition">MARKETPLACE</button>
+                <button onclick="showSection('cluster')" class="hover:text-blue-600 transition">MILL DIRECTORY</button>
+                <button onclick="showSection('g2g')" class="hover:text-blue-600 transition text-blue-600">G2G HUB</button>
+            </div>
+        </div>
+        <div class="flex space-x-4">
+            <button onclick="openPortal('Buyer')" class="text-sm font-bold text-slate-600 px-4 py-2 hover:bg-slate-100 rounded-lg">Buyer Login</button>
+            <button onclick="openPortal('Mill')" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold text-sm shadow-lg shadow-blue-200 hover:bg-blue-700 transition">Mill Access</button>
         </div>
     </nav>
 
-    <main class="p-8 max-w-7xl mx-auto">
+    <main class="max-w-7xl mx-auto py-12 px-6">
         
-        <div class="grid md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                <span class="text-slate-500 text-xs font-bold uppercase">Aggregated Capacity</span>
-                <div class="text-3xl font-black mt-1">4,500 <span class="text-sm font-normal text-slate-400">MT/Month</span></div>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                <span class="text-slate-500 text-xs font-bold uppercase">Verified Mills</span>
-                <div class="text-3xl font-black mt-1 text-blue-400">27 <span class="text-sm font-normal text-slate-400">Partners</span></div>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                <span class="text-slate-500 text-xs font-bold uppercase">Current G2G Bid</span>
-                <div class="text-3xl font-black mt-1 text-green-500">$1,150 <span class="text-sm font-normal text-slate-400">FOB</span></div>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                <span class="text-slate-500 text-xs font-bold uppercase">Compliance Score</span>
-                <div class="text-3xl font-black mt-1">98% <span class="text-sm font-normal text-slate-400">Verified</span></div>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="md:col-span-2 bg-slate-800/50 rounded-3xl border border-slate-700 p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-black">Türkiye Strategic Quota (18,000 MT)</h3>
-                    <span class="bg-blue-900/50 text-blue-400 px-3 py-1 rounded-full text-xs font-bold border border-blue-500/30 tracking-widest">G2G PRIORITY</span>
-                </div>
-                <div class="w-full bg-slate-700 h-4 rounded-full mb-2 overflow-hidden">
-                    <div class="bg-gradient-to-r from-blue-600 to-green-500 h-full" style="width: 14%"></div>
-                </div>
-                <div class="flex justify-between text-xs font-bold text-slate-500 uppercase">
-                    <span>Used: 2,520 MT</span>
-                    <span>Remaining: 15,480 MT</span>
-                </div>
-
-                <div class="mt-10 overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="text-xs text-slate-500 uppercase border-b border-slate-700">
-                            <tr>
-                                <th class="pb-4">Mill Partner</th>
-                                <th class="pb-4 text-center">Export Grade</th>
-                                <th class="pb-4 text-center">Certifications</th>
-                                <th class="pb-4 text-right">Live Stock</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm">
-                            <tr class="border-b border-slate-700/50">
-                                <td class="py-4 font-bold flex items-center">
-                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></span>
-                                    Bismillah Rice Mills
-                                </td>
-                                <td class="py-4 text-center">1121 Sella</td>
-                                <td class="py-4 text-center">
-                                    <span class="text-[9px] bg-slate-700 px-2 py-1 rounded mx-1">ISO 22000</span>
-                                    <span class="text-[9px] bg-slate-700 px-2 py-1 rounded mx-1">REAP</span>
-                                </td>
-                                <td class="py-4 text-right font-mono">850 MT</td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="bg-blue-600 rounded-3xl p-8 flex flex-col justify-between">
+        <section id="market-section" class="space-y-8">
+            <div class="flex justify-between items-end">
                 <div>
-                    <h3 class="text-2xl font-black mb-2 leading-tight">G2G Smart Documentation</h3>
-                    <p class="text-blue-100 text-sm opacity-80 mb-6">Automated compliance for Turkish TMO & Ministry of Commerce standards.</p>
-                    
-                    <ul class="space-y-4 text-sm font-bold">
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i> Phyto-Sanitary Certification</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i> Certificate of Origin (G2G)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i> Pre-Shipment Inspection (SGS)</li>
-                        <li class="flex items-center"><i class="fas fa-check-circle mr-3"></i> Export Quota Verification</li>
-                    </ul>
+                    <h2 class="text-4xl font-black">Global Listings</h2>
+                    <p class="text-slate-500">Verified inventory from the 27-mill Bucheki cluster.</p>
                 </div>
-                <button class="mt-8 bg-white text-blue-600 w-full py-4 rounded-xl font-black hover:bg-slate-100 transition shadow-xl">GENERATE PROFORMA</button>
             </div>
-        </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl border shadow-sm hover:shadow-xl transition-all group">
+                    <div class="flex justify-between mb-4">
+                        <span class="bg-green-100 text-green-700 text-[10px] font-black px-2 py-1 rounded">READY TO SHIP</span>
+                        <i class="fas fa-certificate text-blue-500"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">1121 Kainat Sella</h3>
+                    <p class="text-sm text-slate-400 mb-6">Mill: Bismillah Rice Mills</p>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="text-3xl font-black">$1,150</span>
+                            <span class="text-xs text-slate-400 font-bold">/MT FOB</span>
+                        </div>
+                        <button class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-sm group-hover:bg-blue-600 transition">Inquire</button>
+                    </div>
+                </div>
+
+                <div onclick="openStockForm()" class="border-4 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-8 text-slate-300 hover:border-blue-400 hover:text-blue-400 cursor-pointer transition group">
+                    <i class="fas fa-plus-circle text-4xl mb-3 group-hover:scale-110 transition"></i>
+                    <span class="font-black uppercase tracking-widest text-sm">Add Mill Inventory</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="g2g-section" class="hidden animate-fade-in">
+            <div class="bg-slate-900 text-white rounded-[2rem] p-10 shadow-2xl overflow-hidden relative">
+                <div class="relative z-10">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
+                        <span class="text-sm font-bold text-blue-400 uppercase tracking-widest">Active G2G Channel: Pakistan — Türkiye</span>
+                    </div>
+                    <h2 class="text-5xl font-black mb-6">Sovereign Quota Management</h2>
+                    <p class="text-slate-400 max-w-2xl text-lg mb-10">RealionX acts as the unified gateway for government procurement, aggregating 27 mills to fulfill national-scale contracts.</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">QUOTA UTILIZATION</span>
+                            <div class="h-2 bg-slate-800 rounded-full overflow-hidden mb-2">
+                                <div class="bg-blue-500 h-full w-[14%]"></div>
+                            </div>
+                            <span class="text-xl font-bold">2,520 / 18,000 MT</span>
+                        </div>
+                        <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                            <span class="text-xs font-bold text-slate-500 block mb-2">CLUSTER CAPACITY</span>
+                            <div class="text-3xl font-black">4,500 <span class="text-xs font-normal opacity-50">MT/Mo</span></div>
+                        </div>
+                        <div class="bg-blue-600 p-6 rounded-2xl">
+                            <button class="w-full h-full font-black text-sm uppercase tracking-widest">Generate TMO Compliance Report</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cluster-section" class="hidden">
+            <h2 class="text-3xl font-black mb-8">Bucheki Mill Directory</h2>
+            <div class="bg-white rounded-3xl shadow-sm border overflow-hidden">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+                        <tr>
+                            <th class="p-6">Mill Name</th>
+                            <th class="p-6">Compliance</th>
+                            <th class="p-6">Capacity</th>
+                            <th class="p-6">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm font-bold">
+                        <tr class="border-t">
+                            <td class="p-6">Bismillah Rice Mills</td>
+                            <td class="p-6"><span class="text-blue-600">ISO 22000, REAP</span></td>
+                            <td class="p-6">150 MT/Day</td>
+                            <td class="p-6"><span class="text-green-500">● Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
+    <div id="portalModal" class="hidden fixed inset-0 bg-slate-900/90 backdrop-blur-md z-[100] flex items-center justify-center p-6">
+        <div class="bg-white rounded-[2rem] p-10 max-w-md w-full">
+            <h3 class="text-3xl font-black mb-2" id="portalTitle">Portal Access</h3>
+            <p class="text-slate-500 mb-8 text-sm" id="portalDesc"></p>
+            <input type="password" id="portalPass" placeholder="Enter Access Code" class="w-full p-4 bg-slate-100 border rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="verifyAccess()" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-black shadow-lg">Authenticate</button>
+            <button onclick="closePortal()" class="w-full text-slate-400 mt-4 text-xs font-bold uppercase">Cancel</button>
+        </div>
+    </div>
+
     <script>
-        function showPanel(id) {
-            alert("Dashboard Section " + id + " is being updated with live mill feeds.");
+        let currentRole = "";
+
+        function showSection(id) {
+            ['market', 'cluster', 'g2g'].forEach(s => document.getElementById(s + '-section').classList.add('hidden'));
+            document.getElementById(id + '-section').classList.remove('hidden');
+        }
+
+        function openPortal(role) {
+            currentRole = role;
+            document.getElementById('portalTitle').innerText = role + " Portal";
+            document.getElementById('portalDesc').innerText = "Access for verified " + role + " members and cluster partners.";
+            document.getElementById('portalModal').classList.remove('hidden');
+        }
+
+        function closePortal() {
+            document.getElementById('portalModal').classList.add('hidden');
+        }
+
+        function verifyAccess() {
+            const pass = document.getElementById('portalPass').value;
+            if(pass === "2026") {
+                alert(currentRole + " Dashboard Unlocked.");
+                closePortal();
+                if(currentRole === 'Mill') showSection('cluster');
+            } else {
+                alert("Invalid Credentials.");
+            }
+        }
+
+        function openStockForm() {
+            alert("Mill Portal Login Required to Add Inventory.");
+            openPortal('Mill');
         }
     </script>
 </body>
