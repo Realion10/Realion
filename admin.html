@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealionX Admin | Control Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen">
+
+    <div id="authOverlay" class="fixed inset-0 bg-slate-950 z-[100] flex items-center justify-center p-6">
+        <div class="bg-slate-900 p-8 rounded-[2.5rem] border border-slate-800 shadow-2xl w-full max-w-md text-center">
+            <div class="text-3xl font-black mb-6 tracking-tighter">REALION<span class="text-blue-500">X</span> ADMIN</div>
+            <p class="text-slate-500 mb-8 text-sm uppercase font-bold tracking-widest">Master Key Required</p>
+            <input type="password" id="adminPass" placeholder="••••" class="w-full p-5 bg-slate-950 border border-slate-800 rounded-2xl mb-4 outline-none focus:ring-2 focus:ring-blue-600 text-center font-bold text-2xl tracking-widest">
+            <button onclick="unlockTerminal()" class="w-full bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black transition-all shadow-lg shadow-blue-900/20">Initialize Control</button>
+        </div>
+    </div>
+
+    <div id="mainPanel" class="hidden">
+        <nav class="p-6 border-b border-slate-900 flex justify-between items-center bg-slate-900/50 sticky top-0 backdrop-blur-md z-50">
+            <div class="font-black text-xl tracking-tighter">COMMAND CENTER</div>
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-xs font-bold text-slate-500 hover:text-white transition underline">Return to Site</a>
+                <button onclick="location.reload()" class="text-xs font-bold text-red-500 border border-red-500/20 px-3 py-1 rounded-lg">Lock Terminal</button>
+            </div>
+        </nav>
+
+        <main class="max-w-5xl mx-auto py-12 px-6 space-y-12">
+            
+            <section class="bg-slate-900 p-10 rounded-[3rem] border border-slate-800 shadow-xl">
+                <h2 class="text-2xl font-black mb-8 flex items-center">
+                    <span class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-4 text-sm"><i class="fas fa-plus"></i></span>
+                    Publish New Stock
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Mill Entity</label>
+                        <input type="text" id="mill_name" placeholder="Bismillah Rice Mills" class="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl outline-none focus:border-blue-600">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Variety</label>
+                        <select id="variety" class="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl outline-none focus:border-blue-600">
+                            <option>1121 Kainat</option>
+                            <option>IRRI-6</option>
+                            <option>PK-385</option>
+                            <option>Super Basmati</option>
+                            <option>C-9</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Processing</label>
+                        <select id="process_type" class="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl outline-none focus:border-blue-600">
+                            <option>Sella (Parboiled)</option>
+                            <option>Steam</option>
+                            <option>White (Polished)</option>
+                            <option>Brown</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">Quantity (Metric Tons)</label>
+                        <input type="number" id="quantity_mt" placeholder="500" class="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl outline-none focus:border-blue-600">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">FOB Price ($/MT)</label>
+                        <input type="number" id="price_fob" placeholder="1150" class="w-full p-4 bg-slate-950 border border-slate-800 rounded-xl outline-none focus:border-blue-600">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="submitStock()" class="w-full bg-green-600 hover:bg-green-500 text-white p-4 rounded-xl font-black transition-all shadow-lg shadow-green-900/20">PUSH TO LIVE SITE</button>
+                    </div>
+                </div>
+            </section>
+
+            <div>
+                <h3 class="text-xl font-bold mb-6 px-4">Active Listings</h3>
+                <div id="inventoryList" class="space-y-4">
+                    <div class="p-12 text-center text-slate-700 animate-pulse">Scanning cluster inventory...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // CONFIG
+        const SUPABASE_URL = 'https://ihpjixhzfodnipmhsqvu.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_J4B-Z7yfRWio6HhezHGDKA_jgsAsvKu';
+        const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        function unlockTerminal() {
+            if(document.getElementById('adminPass').value === '2026') {
+                document.getElementById('authOverlay').classList.add('hidden');
+                document.getElementById('mainPanel').classList.remove('hidden');
+                loadInventory();
+            } else {
+                alert("INVALID MASTER KEY");
+            }
+        }
+
+        async function submitStock() {
+            const data = {
+                mill_name: document.getElementById('mill_name').value,
+                variety: document.getElementById('variety').value,
+                process_type: document.getElementById('process_type').value,
+                quantity_mt: document.getElementById('quantity_mt').value,
+                price_fob: document.getElementById('price_fob').value,
+                status: 'In Stock'
+            };
+
+            if(!data.mill_name || !data.quantity_mt) return alert("Fill required fields.");
+
+            const { error } = await sb.from('rice_inventory').insert([data]);
+            if(error) alert(error.message);
+            else {
+                alert("INVENTORY UPDATED");
+                loadInventory();
+                document.getElementById('mill_name').value = '';
+                document.getElementById('quantity_mt').value = '';
+            }
+        }
+
+        async function loadInventory() {
+            const { data, error } = await sb.from('rice_inventory').select('*').order('created_at', { ascending: false });
+            const list = document.getElementById('inventoryList');
+            
+            if(!data || data.length === 0) {
+                list.innerHTML = `<div class="p-12 text-center text-slate-700 border-2 border-dashed border-slate-900 rounded-[2rem]">No active stock found.</div>`;
+                return;
+            }
+
+            list.innerHTML = data.map(item => `
+                <div class="bg-slate-900/50 p-6 rounded-3xl border border-slate-800 flex justify-between items-center group hover:border-blue-600 transition">
+                    <div class="flex items-center space-x-6">
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-blue-500 font-black">
+                             ${item.quantity_mt}MT
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg">${item.variety} <span class="text-slate-500 text-sm">(${item.process_type})</span></div>
+                            <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest">${item.mill_name} | $${item.price_fob}/MT</div>
+                        </div>
+                    </div>
+                    <button onclick="removeStock('${item.id}')" class="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        async function removeStock(id) {
+            if(confirm("Permanently delete this stock?")) {
+                await sb.from('rice_inventory').delete().eq('id', id);
+                loadInventory();
+            }
+        }
+    </script>
+</body>
+</html>
