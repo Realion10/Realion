@@ -164,10 +164,13 @@
     </div>
 
     <script>
-        // CONFIGURATION
+     // CONFIGURATION
         const SUPABASE_URL = 'https://ihpjixhzfodnipmhsqvu.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_J4B-Z7yfRWio6HhezHGDKA_jgsAsvKu';
         const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // State to hold selected item
+        let selectedRice = null;
 
         function toggleAuthModal() { document.getElementById('authModal').classList.toggle('hidden'); }
 
@@ -199,7 +202,7 @@
             }
 
             if (!data || data.length === 0) {
-                container.innerHTML = `<div class='col-span-full py-20 text-center opacity-30 font-black'>CLUSTER NODES ONLINE | NO ACTIVE LISTINGS TODAY</div>`;
+                container.innerHTML = `<div class='col-span-full py-20 text-center opacity-30 font-black text-white'>CLUSTER NODES ONLINE | NO ACTIVE LISTINGS TODAY</div>`;
                 return;
             }
 
@@ -215,22 +218,38 @@
                     <div class="grid grid-cols-2 gap-4 mb-10">
                         <div class="bg-white/5 p-4 rounded-2xl">
                             <div class="text-[9px] text-slate-500 font-bold uppercase mb-1">Stock</div>
-                            <div class="font-black text-sm">${item.quantity_mt} MT</div>
+                            <div class="font-black text-sm text-white">${item.quantity_mt} MT</div>
                         </div>
                         <div class="bg-white/5 p-4 rounded-2xl">
                             <div class="text-[9px] text-slate-500 font-bold uppercase mb-1">Process</div>
-                            <div class="font-black text-sm">${item.process_type}</div>
+                            <div class="font-black text-sm text-white">${item.process_type}</div>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <div class="text-3xl font-black tracking-tighter">$${item.price_fob}</div>
+                            <div class="text-3xl font-black tracking-tighter text-white">$${item.price_fob}</div>
                             <div class="text-[10px] font-bold text-slate-500 uppercase">FOB KARACHI</div>
                         </div>
-                        <button class="bg-white text-slate-950 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition">Inquire</button>
+                        <button onclick="openInquiry('${item.variety}', '${item.price_fob}', '${item.mill_name}')" class="bg-white text-slate-950 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition shadow-lg">Inquire</button>
                     </div>
                 </div>
             `).join('');
+        }
+
+        // --- NEW INQUIRY LOGIC ---
+
+        function openInquiry(variety, price, mill) {
+            const phoneNumber = "923001234567"; // REPLACE WITH YOUR ACTUAL WHATSAPP NUMBER
+            const userEmail = document.getElementById('userEmail').innerText;
+            
+            const message = `Hello RealionX Team, %0A%0AI am interested in the following listing from the Portal:%0A%0A` +
+                            `*Item:* ${variety}%0A` +
+                            `*Price:* $${price}/MT%0A` +
+                            `*Mill:* ${mill}%0A` +
+                            `*Buyer Email:* ${userEmail}%0A%0A` +
+                            `Please share the latest SGS report and lead time for this stock.`;
+
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         }
 
         window.onload = checkUser;
