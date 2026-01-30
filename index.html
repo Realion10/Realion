@@ -3,115 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealionX | Global Rice Exchange</title>
+    <title>RealionX | Global Rice Cluster Exchange</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&display=swap" rel="stylesheet">
     <style>
-        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
-        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #166534 100%); }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .gradient-dark { background: linear-gradient(135deg, #020617 0%, #0f172a 100%); }
+        .stats-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        .hero-mesh { background-color: #ffffff; background-image: radial-gradient(at 0% 0%, hsla(210,100%,93%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(220,100%,95%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(200,100%,90%,1) 0, transparent 50%); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-animate { display: inline-block; white-space: nowrap; animation: scroll 30s linear infinite; }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-900">
+<body class="bg-white text-slate-900 overflow-x-hidden">
 
-    <div class="bg-slate-950 text-white py-2 overflow-hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-widest border-b border-slate-800">
-        <div class="inline-block animate-pulse px-4 text-blue-400">● TÜRKIYE G2G QUOTA: 18,000 MT ACTIVE</div>
-        <div class="inline-block px-4 opacity-50">● CONNECTING TO BUCHEKI CLUSTER NODES...</div>
-        <div class="inline-block px-4 opacity-50 text-green-400">● SGS VERIFICATION INTEGRATED</div>
+    <div class="bg-slate-950 text-white py-3 border-b border-white/5 overflow-hidden sticky top-0 z-[60]">
+        <div class="ticker-animate flex space-x-12 items-center">
+            <span class="text-[10px] font-black tracking-[0.2em] text-blue-400">● BUCHEKI CLUSTER: 27 MILLS ACTIVE</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-white">● 1121 KAINAT: $1,140 FOB</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-white">● IRRI-6: $580 FOB</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-green-400">● SGS AUDIT: PASSED JAN 2026</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-white">● TMO TURKEY QUOTA: 12,000 MT REMAINING</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-blue-400">● BUCHEKI CLUSTER: 27 MILLS ACTIVE</span>
+            <span class="text-[10px] font-black tracking-[0.2em] text-white">● 1121 KAINAT: $1,140 FOB</span>
+        </div>
     </div>
 
-    <nav class="glass sticky top-0 z-50 px-8 py-5 border-b flex justify-between items-center shadow-sm">
-        <div class="text-3xl font-black text-slate-900 tracking-tighter cursor-pointer" onclick="location.reload()">REALION<span class="text-blue-600 font-extrabold">X</span></div>
-        <div class="flex items-center space-x-4">
-            <div id="userBadge" class="hidden flex items-center bg-blue-50 px-4 py-2 rounded-xl border border-blue-100">
-                <i class="fas fa-user-check text-blue-600 mr-2 text-xs"></i>
-                <span id="userEmail" class="text-xs font-bold text-blue-700 mr-3"></span>
-                <button onclick="handleLogout()" class="text-slate-400 hover:text-red-600 transition"><i class="fas fa-sign-out-alt"></i></button>
+    <nav class="glass-nav sticky top-[44px] z-50 px-6 py-4 flex justify-between items-center transition-all duration-300">
+        <div class="flex items-center space-x-12">
+            <a href="#" class="text-3xl font-black tracking-tighter text-slate-950">REALION<span class="text-blue-600">X</span></a>
+            <div class="hidden lg:flex space-x-8 text-[11px] font-black uppercase tracking-widest text-slate-500">
+                <a href="#marketplace" class="hover:text-blue-600 transition">Marketplace</a>
+                <a href="#cluster" class="hover:text-blue-600 transition">The Cluster</a>
+                <a href="#logistics" class="hover:text-blue-600 transition">Logistics</a>
+                <a href="#g2g" class="hover:text-blue-600 transition">G2G Protocol</a>
             </div>
-            <button onclick="toggleAuthModal()" id="loginBtn" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg hover:bg-blue-700 transition">Portal Access</button>
+        </div>
+        <div class="flex items-center space-x-6">
+            <div id="userBadge" class="hidden flex items-center bg-slate-100 px-4 py-2 rounded-full border">
+                <span id="userEmail" class="text-[10px] font-black text-slate-600 mr-3"></span>
+                <button onclick="handleLogout()" class="text-slate-400 hover:text-red-600 transition"><i class="fas fa-power-off"></i></button>
+            </div>
+            <button onclick="toggleAuthModal()" id="loginBtn" class="bg-blue-600 text-white px-8 py-3 rounded-full font-black text-[11px] uppercase tracking-widest shadow-xl shadow-blue-500/20 hover:scale-105 transition">Secure Portal</button>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto py-12 px-6">
-        
-        <header class="text-center mb-16 animate-fade-in">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">Sovereign Supply. <br><span class="text-blue-600">Digital Precision.</span></h1>
-            <p class="text-xl text-slate-500 max-w-2xl mx-auto mb-8">The unified digital gateway for Bucheki's 27-mill export cluster. Direct G2G and B2B trade infrastructure.</p>
-            <div class="flex justify-center space-x-4">
-                <span class="bg-white px-4 py-2 rounded-full border text-[10px] font-bold text-slate-400 uppercase tracking-widest shadow-sm">27 Certified Mills</span>
-                <span class="bg-white px-4 py-2 rounded-full border text-[10px] font-bold text-slate-400 uppercase tracking-widest shadow-sm">TMO Turkey Standards</span>
+    <header class="hero-mesh pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center space-x-2 bg-blue-50 px-4 py-2 rounded-full mb-8 border border-blue-100">
+                <span class="w-2 h-2 bg-blue-600 rounded-full animate-ping"></span>
+                <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest">Global Export Gateway</span>
             </div>
-        </header>
-
-        <section id="loggedOutView" class="bg-white border-2 border-dashed border-slate-200 rounded-[3rem] p-20 text-center animate-fade-in shadow-inner">
-            <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-shield-alt text-3xl text-slate-300"></i>
+            <h1 class="text-6xl md:text-8xl font-black text-slate-950 tracking-tighter leading-[0.9] mb-8">
+                The Sovereign <br><span class="text-blue-600">Supply Chain.</span>
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-12 font-medium">
+                Unifying 27 high-yield mills in the Bucheki Export Cluster into a single digital trading protocol for G2G and B2B excellence.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
+                <button onclick="location.href='#marketplace'" class="bg-slate-950 text-white px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-600 transition shadow-2xl">Enter Live Exchange</button>
+                <button class="bg-white border text-slate-950 px-12 py-6 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-slate-50 transition">Review Cluster Profile</button>
             </div>
-            <h2 class="text-3xl font-bold mb-4">Exchange is Locked</h2>
-            <p class="text-slate-500 mb-8 max-w-md mx-auto">Private pricing, SGS reports, and cluster mill inventories are restricted to verified trading partners.</p>
-            <button onclick="toggleAuthModal()" class="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black hover:bg-blue-600 transition-all transform hover:scale-105">Login to View Marketplace</button>
-        </section>
+        </div>
+    </header>
 
-        <section id="loggedInView" class="hidden space-y-12 animate-fade-in">
-            
-            <div class="gradient-bg text-white rounded-[2.5rem] p-10 shadow-2xl relative border border-white/10">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                    <div class="mb-6 md:mb-0">
-                        <h3 class="text-blue-300 font-bold uppercase tracking-widest text-xs mb-4">G2G Priority: Türkiye Quota Status</h3>
-                        <div class="grid grid-cols-2 gap-8">
+    <section id="marketplace" class="py-24 px-6 bg-slate-950 text-white rounded-[4rem] mx-4 relative -top-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl font-black mb-4 tracking-tighter">Live Exchange <span class="text-blue-500">.</span></h2>
+                    <p class="text-slate-400 max-w-md">Real-time inventory from the Bucheki Cluster. Pricing is FOB Karachi/Port Qasim.</p>
+                </div>
+                <div class="mt-8 md:mt-0 flex space-x-4">
+                    <div class="bg-slate-900 border border-white/5 p-4 rounded-2xl text-center min-w-[140px]">
+                        <div class="text-[10px] font-black text-slate-500 uppercase">Cluster Status</div>
+                        <div class="text-green-500 font-black">OPERATIONAL</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loggedOutView" class="py-32 text-center border-2 border-dashed border-white/10 rounded-[3rem] bg-white/5">
+                <i class="fas fa-lock text-5xl text-blue-500 mb-8"></i>
+                <h3 class="text-3xl font-black mb-4 tracking-tight text-white">Portal Access Required</h3>
+                <p class="text-slate-400 mb-10 max-w-sm mx-auto">Live pricing and SGS inspection reports are reserved for verified global partners.</p>
+                <button onclick="toggleAuthModal()" class="bg-blue-600 text-white px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 transition shadow-xl shadow-blue-500/20">Verify Identity</button>
+            </div>
+
+            <div id="loggedInView" class="hidden grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <section id="cluster" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h3 class="text-[10px] font-black text-blue-600 uppercase tracking-[0.3em] mb-4">Trade Infrastructure</h3>
+                    <h2 class="text-5xl font-black tracking-tighter mb-8 leading-tight">Bucheki Cluster:<br>27 Mills, One Standard.</h2>
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-microchip text-blue-600"></i></div>
                             <div>
-                                <h2 class="text-4xl font-black">15,480 MT</h2>
-                                <p class="opacity-60 text-xs mt-1 uppercase tracking-tighter">Remaining Capacity</p>
+                                <h4 class="font-black text-lg">Integrated ERP Control</h4>
+                                <p class="text-slate-500 text-sm">Every bag is tracked from the cluster mill to the container loading bay.</p>
                             </div>
+                        </div>
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-vial text-blue-600"></i></div>
                             <div>
-                                <h2 class="text-4xl font-black">4,500 MT</h2>
-                                <p class="opacity-60 text-xs mt-1 uppercase tracking-tighter">Cluster Yield / Mo</p>
+                                <h4 class="font-black text-lg">SGS On-Site Testing</h4>
+                                <p class="text-slate-500 text-sm">Pre-shipment inspection is hardcoded into our export protocol.</p>
                             </div>
                         </div>
                     </div>
-                    <button class="bg-blue-500/20 border border-blue-400/30 text-blue-100 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-500 transition">Download TMO Specs</button>
                 </div>
-            </div>
-
-            <div>
-                <div class="flex justify-between items-center mb-8 px-2">
-                    <div>
-                        <h3 class="text-3xl font-black">Cluster Inventory</h3>
-                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Direct from 27 Bucheki Mills</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-100 h-64 rounded-[2.5rem] p-10 flex flex-col justify-end">
+                        <div class="text-4xl font-black">4,500</div>
+                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest">MT Monthly Yield</div>
                     </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
-                        <span class="text-xs font-black text-green-600 uppercase">Live Market Data</span>
+                    <div class="bg-blue-600 h-64 rounded-[2.5rem] p-10 flex flex-col justify-end text-white">
+                        <div class="text-4xl font-black">27</div>
+                        <div class="text-[10px] font-black text-blue-200 uppercase tracking-widest">Certified Mills</div>
                     </div>
-                </div>
-                
-                <div id="inventoryContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="col-span-full py-20 text-center">
-                        <i class="fas fa-circle-notch fa-spin text-slate-300 text-3xl"></i>
-                        <p class="text-slate-400 mt-4 font-bold">Synchronizing with Cluster...</p>
+                    <div class="col-span-2 bg-slate-900 h-48 rounded-[2.5rem] p-10 text-white flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-black leading-tight tracking-tight">ISO 22000 &<br>HACCP Compliant</div>
+                        </div>
+                        <i class="fas fa-award text-5xl text-blue-500 opacity-50"></i>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <div id="authModal" class="hidden fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[100] flex items-center justify-center p-6">
-        <div class="bg-white rounded-[2.5rem] p-10 max-w-md w-full shadow-2xl text-center">
-            <h3 class="text-3xl font-black mb-8">Partner Portal</h3>
-            <div class="space-y-4">
-                <button onclick="handleGoogleLogin()" class="w-full flex items-center justify-center space-x-3 border-2 border-slate-100 py-4 rounded-2xl font-bold text-slate-700 hover:bg-slate-50 transition">
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] bg-slate-950/80 backdrop-blur-xl border border-white/10 px-8 py-4 rounded-full flex items-center space-x-10 shadow-2xl">
+        <a href="#" class="text-white/50 hover:text-white transition"><i class="fas fa-home"></i></a>
+        <a href="#marketplace" class="text-white/50 hover:text-white transition"><i class="fas fa-chart-line"></i></a>
+        <div class="w-px h-4 bg-white/10"></div>
+        <a href="https://wa.me/yournumber" class="text-green-400 hover:scale-110 transition"><i class="fab fa-whatsapp"></i></a>
+        <button onclick="toggleAuthModal()" class="text-blue-400 hover:scale-110 transition"><i class="fas fa-user-lock"></i></button>
+    </div>
+
+    <div id="authModal" class="hidden fixed inset-0 bg-slate-950/98 z-[200] flex items-center justify-center p-6">
+        <div class="bg-white rounded-[3rem] p-12 max-w-md w-full text-center relative overflow-hidden shadow-2xl">
+            <div class="relative z-10">
+                <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8 text-blue-600 text-3xl"><i class="fas fa-fingerprint"></i></div>
+                <h3 class="text-3xl font-black mb-4 tracking-tighter text-slate-950">Secure Access</h3>
+                <p class="text-slate-500 mb-10 text-sm font-medium">Identify yourself via Google SSO to access private cluster pricing and quota data.</p>
+                <button onclick="handleGoogleLogin()" class="w-full bg-slate-950 text-white flex items-center justify-center space-x-4 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-600 transition shadow-2xl">
                     <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-5 h-5">
-                    <span>Continue with Google</span>
+                    <span>Authorize with Google</span>
                 </button>
-                <div class="py-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">Exchange Access Control</div>
+                <button onclick="toggleAuthModal()" class="mt-8 text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-slate-950 transition">Disconnect</button>
             </div>
-            <button onclick="toggleAuthModal()" class="mt-8 text-[10px] font-black uppercase text-slate-400 hover:text-slate-900 tracking-widest">Cancel Access</button>
         </div>
     </div>
 
     <script>
+        // CONFIGURATION
         const SUPABASE_URL = 'https://ihpjixhzfodnipmhsqvu.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_J4B-Z7yfRWio6HhezHGDKA_jgsAsvKu';
         const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -138,42 +191,43 @@
 
         async function fetchInventory() {
             const { data, error } = await sb.from('rice_inventory').select('*').order('created_at', { ascending: false });
-            const container = document.getElementById('inventoryContainer');
+            const container = document.getElementById('loggedInView');
             
             if (error) {
-                container.innerHTML = `<p class='text-red-500 col-span-full text-center'>Connection Error: ${error.message}</p>`;
+                container.innerHTML = `<p class='text-red-500'>Node Error: ${error.message}</p>`;
                 return;
             }
 
             if (!data || data.length === 0) {
-                container.innerHTML = `<div class='col-span-full py-20 border-2 border-dashed rounded-[3rem] text-center'>
-                    <p class='text-slate-400 font-bold'>No active cluster inventory listed for today.</p>
-                </div>`;
+                container.innerHTML = `<div class='col-span-full py-20 text-center opacity-30 font-black'>CLUSTER NODES ONLINE | NO ACTIVE LISTINGS TODAY</div>`;
                 return;
             }
 
             container.innerHTML = data.map(item => `
-                <div class="bg-white p-8 rounded-[2.5rem] border shadow-sm hover:shadow-xl transition-all border-slate-100 group">
-                    <div class="flex justify-between items-start mb-6">
+                <div class="bg-white/5 border border-white/10 p-10 rounded-[2.5rem] hover:bg-white/10 transition group">
+                    <div class="flex justify-between items-start mb-10">
                         <div>
-                            <h4 class="text-2xl font-black group-hover:text-blue-600 transition">${item.variety}</h4>
-                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">${item.mill_name}</p>
+                            <div class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-2">${item.mill_name}</div>
+                            <h4 class="text-3xl font-black tracking-tight">${item.variety}</h4>
                         </div>
-                        <span class="bg-green-50 text-green-700 px-3 py-1 rounded-full text-[10px] font-black border border-green-100">${item.status}</span>
+                        <i class="fas fa-file-pdf text-slate-700 group-hover:text-blue-500 transition cursor-pointer"></i>
                     </div>
-                    <div class="grid grid-cols-2 gap-3 mb-6">
-                        <div class="bg-slate-50 p-4 rounded-2xl">
-                            <span class="text-[9px] block font-bold text-slate-400 uppercase">Availability</span>
-                            <span class="font-bold text-sm">${item.quantity_mt} MT</span>
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="bg-white/5 p-4 rounded-2xl">
+                            <div class="text-[9px] text-slate-500 font-bold uppercase mb-1">Stock</div>
+                            <div class="font-black text-sm">${item.quantity_mt} MT</div>
                         </div>
-                        <div class="bg-slate-50 p-4 rounded-2xl">
-                            <span class="text-[9px] block font-bold text-slate-400 uppercase">Process</span>
-                            <span class="font-bold text-sm">${item.process_type}</span>
+                        <div class="bg-white/5 p-4 rounded-2xl">
+                            <div class="text-[9px] text-slate-500 font-bold uppercase mb-1">Process</div>
+                            <div class="font-black text-sm">${item.process_type}</div>
                         </div>
                     </div>
-                    <div class="flex justify-between items-end border-t pt-6">
-                        <div class="text-3xl font-black text-slate-900">$${item.price_fob}<span class="text-[10px] font-normal text-slate-400 ml-1">/MT</span></div>
-                        <button class="bg-slate-900 text-white px-6 py-3 rounded-xl font-bold text-xs shadow-lg hover:bg-blue-600 transition-all">INQUIRE</button>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <div class="text-3xl font-black tracking-tighter">$${item.price_fob}</div>
+                            <div class="text-[10px] font-bold text-slate-500 uppercase">FOB KARACHI</div>
+                        </div>
+                        <button class="bg-white text-slate-950 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 hover:text-white transition">Inquire</button>
                     </div>
                 </div>
             `).join('');
